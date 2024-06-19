@@ -11,7 +11,7 @@ if __name__ == "__main__":
     logs_collection = client.logs.nginx
 
     """Get the total number of logs"""
-    totol_logs = logs_collection.count_documents({})
+    total_logs = logs_collection.count_documents({})
     print(f"{total_logs} logs")
 
     """Get the number of logs for each method"""
