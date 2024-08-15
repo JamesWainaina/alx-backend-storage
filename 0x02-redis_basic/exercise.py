@@ -30,7 +30,7 @@ def call_history(method: Callable) -> Callable:
     Decorator to store the number of time a method is called
     """
     random_key = method.__qualname__
-    inputs = random_key  + ":inputs"
+    inputs = random_key + ":inputs"
     outputs = random_key + ":outputs"
 
     @functools.wraps(method)
@@ -44,6 +44,7 @@ def call_history(method: Callable) -> Callable:
         return data
     return wrapper
 
+
 class Cache:
     """Cache classs"""
 
@@ -51,7 +52,7 @@ class Cache:
         """constructor"""
         self._redis = redis.Redis()
         self._redis.flushdb()
-    
+
     @call_history
     @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
