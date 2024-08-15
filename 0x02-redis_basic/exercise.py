@@ -57,7 +57,7 @@ def replay(method: Callable) -> None:
     inputs = cache.lrange(random_key + ":inputs", 0, -1)
     outputs = cache.lrange(random_key + ":outputs", 0, -1)
     for inn, out in zip(inputs, outputs):
-        print("{}(*{}) -> {}".format(method.___qualname__,
+        print("{}(*{}) -> {}".format(method.__qualname__,
                                      inn.decode('utf-8'),
                                      out.decode('utf-8')))
 
