@@ -13,9 +13,7 @@ redis_client = redis.Redis()
 
 
 def count_requests(method):
-    """
-    Decorator for counting
-    """
+    """ Decorator for counting """
     @wraps(method)
     def wrapper(url):
         key_count = f"count:{url}"
@@ -25,24 +23,23 @@ def count_requests(method):
         if cached_value:
             return cached_value.decode('utf-8')
 
-        hmtl_content = method(url)
+        html_content = method(url)
 
         redis_client.incr(key_count)
-        redis_client.setex(key_cached, 10, hmtl_content)
+        redis_client.setex(key_cached, 10, html_content)
 
-        return hmtl_content
+        return html_content
+
     return wrapper
 
 
 @count_requests
 def get_page(url: str) -> str:
-    """
-    Obtain the HTML content of a URL
-    """
+    """ Obtain the HTML content of a  URL """
     response = requests.get(url, timeout=10)
     return response.text
 
 
-if __name__ == "__main__":
-    URL = 'http://slowwly.robertomurray.co.ke'
+if __name__ == '__main__':
+    URL = 'http://slowwly.robertomurray.co.uk'
     print(get_page(URL))
