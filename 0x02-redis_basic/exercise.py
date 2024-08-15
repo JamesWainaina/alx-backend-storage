@@ -7,7 +7,7 @@ from typing import Union, Optional, Callable
 import functools
 
 
-def count_calls(method: callable) -> Callable:
+def count_calls(method: Callable) -> Callable:
     """
     Decorator to count the number ot times a method is called
     Args:
